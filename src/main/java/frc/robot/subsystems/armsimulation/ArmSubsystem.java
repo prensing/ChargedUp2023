@@ -67,7 +67,7 @@ public class ArmSubsystem extends SubsystemBase {
           Units.degreesToRadians(-75),
           Units.degreesToRadians(255),
           m_armMass, 
-          false,
+          true,
           VecBuilder.fill(kArmEncoderDistPerPulse) // Add noise with a std-dev of 1 tick
           );
   public final EncoderSim m_encoderSim = new EncoderSim(m_encoder);
