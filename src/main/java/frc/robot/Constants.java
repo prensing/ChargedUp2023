@@ -93,7 +93,7 @@ public final class Constants {
 
     // for arm simulation
 
- // These are fake gains; in actuality these must be determined individually for
+    // These are fake gains; in actuality these must be determined individually for
     // each robot
     public static final double kP = 10;
     public static final double kSVolts = 12;
@@ -109,12 +109,13 @@ public final class Constants {
     public static final int kEncoderPPR = 256;
     public static final double kEncoderDistancePerPulse = 2.0 * Math.PI / kEncoderPPR;
 
-// The offset of the arm from the horizontal in its neutral position,
-// measured from the horizontal
+    // The offset of the arm from the horizontal in its neutral position,
+    // measured from the horizontal
     public static final double kArmOffsetRads = 0.5;
 
     public static final double kAutoTimeoutSeconds = 12;
     static final double kAutoShootTimeSeconds = 7;
 
     static final int kDriverControllerPort = 0;
+    // public static final double ArmDeadzone = 0.0;
 }
