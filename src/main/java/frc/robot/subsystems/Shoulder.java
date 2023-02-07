@@ -18,6 +18,25 @@ import edu.wpi.first.wpilibj2.command.TrapezoidProfileSubsystem;
 import frc.robot.Constants;
 
 public class Shoulder extends TrapezoidProfileSubsystem {
+  // TODO: The following constants came from the 2022 robot.
+  // These need to be set for this robot.  
+
+  private static final double ARM_KS = 0.182; // TODO: This may need to be tuned
+  // The following constants are computed from https://www.reca.lc/arm
+  private static final double ARM_KG = 2.07;
+  private static final double ARM_KV = 1.83;
+  private static final double ARM_KA = 0.08;
+  // PID Constants for the Arm PID controller
+  // Since we're using Trapeziodal control, all values will be 0 except for P
+  private static final double ARM_K_P = 10.0;
+  private static final double ARM_K_I = 0.0;
+  private static final double ARM_K_D = 0.0;
+  private static final double ARM_K_FF = 0.0;
+// Constants to limit the arm rotation speed
+  private static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(200.0);
+  private static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(200.0);
+  private static final double ARM_OFFSET_RAD = Math.toRadians(110.0);
+
 
   // Define the motor and encoders
   private final CANSparkMax m_motorLeader;
@@ -26,9 +45,9 @@ public class Shoulder extends TrapezoidProfileSubsystem {
   private final SparkMaxPIDController m_PIDController;
 
   private final ArmFeedforward m_Feedforward = 
-    new ArmFeedforward(Constants.ARM_KS, Constants.ARM_KG, Constants.ARM_KV, Constants.ARM_KA);
+    new ArmFeedforward(ARM_KS, ARM_KG, ARM_KV, ARM_KA);
 
-  private double m_kPArm = Constants.ARM_K_P;
+  private double m_kPArm = ARM_K_P;
   private int m_index;
 
   private boolean m_coastMode = false;
@@ -41,9 +60,9 @@ public class Shoulder extends TrapezoidProfileSubsystem {
 
     super(
       // The constraints for the generated profiles
-      new TrapezoidProfile.Constraints(Constants.ARM_MAX_VEL_RAD_PER_SEC, Constants.ARM_MAX_ACC_RAD_PER_SEC_SQ),
+      new TrapezoidProfile.Constraints(ARM_MAX_VEL_RAD_PER_SEC, ARM_MAX_ACC_RAD_PER_SEC_SQ),
       // The initial position of the mechanism
-      Constants.ARM_OFFSET_RAD);
+      ARM_OFFSET_RAD);
 
     
     // Create the motor, PID Controller and encoder.
@@ -55,16 +74,16 @@ public class Shoulder extends TrapezoidProfileSubsystem {
     
     m_PIDController = m_motorLeader.getPIDController();
     m_PIDController.setP(m_kPArm);
-    m_PIDController.setI(Constants.ARM_K_I);
-    m_PIDController.setD(Constants.ARM_K_D);
-    m_PIDController.setFF(Constants.ARM_K_FF);
+    m_PIDController.setI(ARM_K_I);
+    m_PIDController.setD(ARM_K_D);
+    m_PIDController.setFF(ARM_K_FF);
 
     m_encoder = m_motorLeader.getEncoder();
     // Set the position conversion factor. Note that the Trapezoidal control
     // expects angles in radians.
     // TODO: Set this based on shoulder gearbox gear ratio
     m_encoder.setPositionConversionFactor((1.0 / (25.0 * 60.0 / 16.0)) * 2.0 * Math.PI);
-    m_encoder.setPosition(Constants.ARM_OFFSET_RAD);
+    m_encoder.setPosition(ARM_OFFSET_RAD);
     SmartDashboard.putNumber("arm" + m_index + "/P Gain", m_kPArm);
   }
 

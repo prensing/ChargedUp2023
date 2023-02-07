@@ -98,39 +98,10 @@ public final class Constants {
     // Following three CAN IDs are for the Arm subsystem
     public static final int ELEVATOR_CAN_ID = 1; // TODO: Set CanID
     public static final int[] SHOULDER_CAN_IDS = new int[] {7,10}; // TODO: Set CANIDs
-    // Feedforward constants for the each Climber Arm
-    public static final double ELEVATOR_KS = 0.182; // TODO: This may need to be tuned
-    // The following constants are computed from https://www.reca.lc/arm
-    public static final double ELEVATOR_KG = 1.19;
-    public static final double ELEVATOR_KV = 7.67;
-    public static final double ELEVATOR_KA = 0.19;
     
-    // PID Constants for the Arm PID controller
-    // Since we're using Trapeziodal control, all values will be 0 except for P
-    public static final double ELEVATOR_K_P0 = 100;
-    public static final double ELEVATOR_K_P1 = 100;
-    public static final double ELEVATOR_K_I = 0.0;
-    public static final double ELEVATOR_K_D = 0.0;
-    public static final double ELEVATOR_K_FF = 0.0;
-    public static final double ELEVATOR_OFFSET_METER = Units.inchesToMeters(1.5);
       // Feedforward constants for the each Climber Arm
-      public static final double ARM_KS = 0.182; // TODO: This may need to be tuned
-      // The following constants are computed from https://www.reca.lc/arm
-      public static final double ARM_KG = 2.07;
-      public static final double ARM_KV = 1.83;
-      public static final double ARM_KA = 0.08;
-  
-      // Constants to limit the arm rotation speed
-      public static final double ARM_MAX_VEL_RAD_PER_SEC = Math.toRadians(200.0);
-      public static final double ARM_MAX_ACC_RAD_PER_SEC_SQ = Math.toRadians(200.0);
-      public static final double ARM_OFFSET_RAD = Math.toRadians(110.0);
-  
-      // PID Constants for the Arm PID controller
-      // Since we're using Trapeziodal control, all values will be 0 except for P
-      public static final double ARM_K_P = 10.0;
-      public static final double ARM_K_I = 0.0;
-      public static final double ARM_K_D = 0.0;
-      public static final double ARM_K_FF = 0.0;
+    
+
 
       public static final double ARM_ANGLE_TOLERANCE = Units.degreesToRadians(1.0);
 
